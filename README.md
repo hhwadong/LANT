@@ -1,4 +1,4 @@
-# LANT-v3 - Learning Assistant & Note-taking Tool
+# LANT - Learning Assistant & Note-taking Tool
 
 A powerful, private, and offline-first learning assistant that helps you organize lectures, manage study sessions, and interact with AI models for enhanced learning.
 
@@ -12,7 +12,7 @@ A powerful, private, and offline-first learning assistant that helps you organiz
 - 🌓 **Dark/Light Theme**: Comfortable viewing in any environment
 - 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -42,7 +42,7 @@ A powerful, private, and offline-first learning assistant that helps you organiz
 4. **Open your browser**
    Navigate to `http://localhost:5000`
 
-## 📚 Manual Installation
+## Manual Installation
 
 ### Backend Setup
 
@@ -69,7 +69,7 @@ A powerful, private, and offline-first learning assistant that helps you organiz
    npm run build
    ```
 
-## 🛠️ Usage
+## Usage
 
 ### Creating Your First Lecture
 
@@ -99,7 +99,7 @@ A powerful, private, and offline-first learning assistant that helps you organiz
 - **Merge Sessions**: Combines multiple sessions into one
 - **Clear Conversation**: Removes all messages from current session
 
-## ⚙️ Configuration
+## Configuration
 
 ### AI Models
 
@@ -153,7 +153,7 @@ npm run build
 
 The built files will be placed in the `static/` directory.
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -184,24 +184,16 @@ npm run build
 - Clear cache periodically if the app becomes slow
 - Close unused sessions to free up memory
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License. See LICENSE file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Ollama for local AI model support
 - React for the modern frontend framework
 - Flask for the lightweight backend
 - FontAwesome for beautiful icons
 
-## 📞 Support
 
-For issues and questions:
-1. Check the troubleshooting section
-2. Search existing issues
-3. Create a new issue with detailed information
-
----
-
-**LANT-v3** - Your private, offline learning companion.
+**LANT** - Your private, offline learning companion.
