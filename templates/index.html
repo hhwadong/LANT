@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LANT - Learning Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <div class="app-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>LANT</span>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search lectures, sessions...">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="nav-btn" id="theme-toggle" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-btn" id="settings-btn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="nav-btn" id="help-btn" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="main-layout">
+            <!-- Sidebar Toggle Button -->
+            <button class="sidebar-toggle" id="sidebar-toggle" title="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Left Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h2>LANT</h2>
+                    <button class="sidebar-close" id="sidebar-close" title="Close sidebar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <div class="nav-section-header">
+                            <span>Workspace</span>
+                            <button class="nav-add-btn" id="create-lecture-btn" title="New Lecture">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="lectures-list" class="nav-items">
+                            <div class="nav-loading">Loading lectures...</div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-section-header">
+                            <span>Sessions</span>
+                            <button class="nav-add-btn" id="create-session-btn" title="New Session" disabled>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="sessions-list" class="nav-items">
+                            <div class="nav-empty">Select a lecture first</div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-section-header">
+                            <span>Documents</span>
+                        </div>
+                        <div class="upload-area" id="upload-area">
+                            <i class="fas fa-upload"></i>
+                            <p>Drop files here or click to upload</p>
+                            <input type="file" id="file-input" multiple accept=".pdf,.ppt,.pptx,.docx,.txt,.md,.png,.jpg,.jpeg,.bmp,.tiff,.gif">
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <div class="footer-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </div>
+                    <div class="footer-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <div class="content-header">
+                    <h1 id="page-title">Welcome to LANT</h1>
+                    <div class="header-actions">
+                        <button class="action-btn" id="generate-questions-btn" disabled title="Generate Questions">
+                            <i class="fas fa-magic"></i>
+                            Generate Questions
+                        </button>
+                        <button class="action-btn" id="merge-sessions-btn" disabled title="Merge Sessions">
+                            <i class="fas fa-compress-alt"></i>
+                            Merge
+                        </button>
+                        <button class="action-btn" id="clear-cache-btn" title="Clear Cache">
+                            <i class="fas fa-broom"></i>
+                            Clear Cache
+                        </button>
+                    </div>
+                </div>
+
+                <div class="content-body">
+                    <div id="chat-container" class="chat-container">
+                        <div id="chat-messages" class="messages-area">
+                            <div class="welcome-screen">
+                                <div class="welcome-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h2>Learning Assistant & Note-taking Tool</h2>
+                                <p>Create lectures, add sessions, upload documents, and start learning with AI assistance.</p>
+                                <div class="quick-actions">
+                                    <button class="primary-btn" onclick="app.showCreateLectureModal()">
+                                        <i class="fas fa-plus"></i>
+                                        Create Your First Lecture
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input-area">
+                            <div class="input-wrapper">
+                                <textarea
+                                    id="message-input"
+                                    placeholder="Message AI assistant..."
+                                    disabled
+                                    rows="1"
+                                ></textarea>
+                                <div class="input-actions">
+                                    <select id="model-select" class="model-selector">
+                                        <option value="qwen2.5-coder:3b-instruct">Qwen 2.5 3B</option>
+                                        <option value="qwen2.5-coder:7b-instruct">Qwen 2.5 7B</option>
+                                        <option value="codellama:7b">CodeLlama 7B</option>
+                                        <option value="deepseek-coder:6.7b-instruct">DeepSeek 6.7B</option>
+                                    </select>
+                                    <button id="send-btn" class="send-btn" disabled>
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="create-lecture-modal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Create New Lecture</h3>
+                <button class="modal-close" onclick="app.hideModal('create-lecture-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="lecture-name-input" placeholder="Enter lecture name" class="text-input">
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="cancel-lecture-btn">Cancel</button>
+                <button class="primary-btn" id="save-lecture-btn">Create Lecture</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="create-session-modal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Create New Session</h3>
+                <button class="modal-close" onclick="app.hideModal('create-session-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="session-name-input" placeholder="Enter session name (optional)" class="text-input">
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="cancel-session-btn">Cancel</button>
+                <button class="primary-btn" id="save-session-btn">Create Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-backdrop"></div>
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span id="status-indicator">
+                <i class="fas fa-circle text-success"></i>
+                Connected
+            </span>
+        </div>
+        <div class="status-right">
+            <span id="model-info">Loading...</span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
